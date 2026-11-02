@@ -1,5 +1,10 @@
 # pixiv-setu · 按你自己的偏好抽图
 
+[![Python](https://img.shields.io/badge/python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![NoneBot2](https://img.shields.io/badge/NoneBot2-2.x-1e90ff)](https://nonebot.dev/)
+[![CI](https://github.com/yihejiekong/pixiv-setu/actions/workflows/ci.yml/badge.svg)](https://github.com/yihejiekong/pixiv-setu/actions/workflows/ci.yml)
+
 > 一个「有审美」的随机图机器人后端：**离线建池 + 在线打分 + 分级兜底**，出图不重复、不出冷门、AI 有配额。
 
 不是「随机拉一张 pixiv 图」，而是：

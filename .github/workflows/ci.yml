@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: 语法检查（不装依赖也能跑）
+        run: python -m compileall -q pixcli.py build_pool.py pixdb.py mkproxy.py nonebot_plugin
+
+      - name: 装依赖（非阻塞：Pillow/openpyxl 只是运行期需要）
+        continue-on-error: true
+        run: pip install -r requirements.txt
+
+      - name: 标准库冒烟：解析部分能导入
+        run: |
+          python - <<'PY'
+          import ast, io, pathlib
+          for p in pathlib.Path('.').rglob('*.py'):
+              ast.parse(io.open(p, encoding='utf-8').read())
+          print('ast ok')
+          PY
+
+      - name: 凭据扫描（仓库里不该出现这些东西）
+        run: |
+          if grep -rInE 'PHPSESSID=[A-Za-z0-9_-]{8,}|refresh_token=[A-Za-z0-9_-]{16,}|sk-[A-Za-z0-9]{20,}'               --include='*.py' --include='*.md' --include='*.example' . ; then
+            echo '::error::疑似凭据被提交了'; exit 1
+          fi
+          echo 'clean'
