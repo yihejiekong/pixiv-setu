@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """极简订阅→xray 配置（只为一个用途：临时开 socks5 10808 去连 pixiv 建池）。
 子命令：
-  fetch   拉订阅、解出节点、探测可用性、写 /opt/bh2-pix/proxy/config.json
+  fetch   拉订阅、解出节点、探测可用性、写 proxy/config.json（ROOT 可由 PIX_PROXY_ROOT 覆盖）
   up      前台跑起来（systemd 用）
 用法：python3 mkproxy.py fetch | up
 """
