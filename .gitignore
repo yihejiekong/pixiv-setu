@@ -1,0 +1,27 @@
+# 凭据与产物
+env
+*.env
+db.json
+pool.json
+pool_meta.json
+pick_hist.json
+out/
+proxy/
+pool.json.tmp
+
+# 图片与缓存
+*.jpg
+*.jpeg
+*.png
+!db/*.png
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 编辑器
+.idea/
+.vscode/
+.DS_Store
